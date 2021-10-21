@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iot/screens/home.dart';
+// import 'package:iot/screens/home.dart';
+import 'package:iot/screens/window_register.dart';
 
 void main() {
   runApp(SmartWindow());
@@ -13,7 +14,7 @@ class SmartWindow extends StatelessWidget {
         primaryColor: Colors.cyan[900],
         accentColor: Colors.green[700],
       ),
-      home: Home(),
+      home: WindowRegister(),
     );
   }
 }

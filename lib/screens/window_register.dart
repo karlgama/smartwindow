@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iot/screens/windows_list.dart';
 
-class Home extends StatelessWidget {
+class WindowRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,13 @@ class Home extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => WindowsList(),
+                    ),
+                  );
+                },
                 child: Text('adicionar'),
               ),
             ],
