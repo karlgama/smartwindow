@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:iot/models/window.dart';
 import 'package:iot/screens/windows_list.dart';
 
 class WindowRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _nameController = TextEditingController();
+    final TextEditingController _channelController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('SmartWindow'),
@@ -16,6 +20,7 @@ class WindowRegister extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
+                controller: _nameController,
                 decoration: InputDecoration(
                   labelText: 'Sua janela Ex: janela do quarto',
                 ),
@@ -24,6 +29,7 @@ class WindowRegister extends StatelessWidget {
                 ),
               ),
               TextField(
+                controller: _channelController,
                 decoration: InputDecoration(
                   labelText: 'Channel',
                 ),
@@ -33,6 +39,9 @@ class WindowRegister extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
+                  final String name = _nameController.text;
+                  final String channel = _channelController.text;
+                  final Window newWindow = Window(0, name, channel, 'fechada');
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => WindowsList(),
