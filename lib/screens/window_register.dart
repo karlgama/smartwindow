@@ -28,15 +28,15 @@ class WindowRegister extends StatelessWidget {
                   fontSize: 24.4,
                 ),
               ),
-              TextField(
-                controller: _channelController,
-                decoration: InputDecoration(
-                  labelText: 'Channel',
-                ),
-                style: TextStyle(
-                  fontSize: 24.4,
-                ),
-              ),
+              // TextField(
+              //   controller: _channelController,
+              //   decoration: InputDecoration(
+              //     labelText: 'Channel',
+              //   ),
+              //   style: TextStyle(
+              //     fontSize: 24.4,
+              //   ),
+              // ),
               ElevatedButton(
                 onPressed: () {
                   final String name = _nameController.text;

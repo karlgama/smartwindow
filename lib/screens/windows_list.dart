@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iot/components/window_card.dart';
 import 'package:iot/database/app_database.dart';
 import 'package:iot/models/window.dart';
 import 'package:iot/screens/window_detail.dart';
@@ -7,24 +8,32 @@ class WindowsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Lista de janelas cadastradas'),
-      ),
-      body: FutureBuilder<List<Window>>(
-        initialData: [],
-        future: findAll(),
-        builder: (context, snapshot) {
-          final List<Window> windows = snapshot.data as List<Window>;
-          return ListView.builder(
-            itemBuilder: (context, index) {
-              final Window window = windows[index];
-              return _WindowCard(window);
-            },
-            itemCount: windows.length,
-          );
-        },
-      ),
-    );
+        appBar: AppBar(
+          title: Text('Lista de janelas cadastradas'),
+        ),
+        body: Container(
+          width: double.maxFinite,
+          child: Column(
+            children: [
+              WindowCard(),
+              WindowCard(),
+            ],
+          ),
+          // body: FutureBuilder<List<Window>>(
+          //   initialData: [],
+          //   future: findAll(),
+          //   builder: (context, snapshot) {
+          //     final List<Window> windows = snapshot.data as List<Window>;
+          //     return ListView.builder(
+          //       itemBuilder: (context, index) {
+          //         final Window window = windows[index];
+          //         return _WindowCard(window);
+          //       },
+          //       itemCount: windows.length,
+          //     );
+          //   },
+          // ),
+        ));
   }
 }
 
