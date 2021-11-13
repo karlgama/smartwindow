@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iot/components/window_card.dart';
+import 'package:iot/models/window.dart';
 
 class WindowDetails extends StatelessWidget {
+  final Window window;
+
+  WindowDetails(this.window);
   // final List<bool> isSelected;
 
   // WindowDetails(this.isSelected);
@@ -14,7 +18,7 @@ class WindowDetails extends StatelessWidget {
       ),
       body: Column(
         children: [
-          WindowCard(),
+          WindowCard(window),
           ToggleButtons(
             children: [Icon(Icons.check_circle), Icon(Icons.cancel)],
             onPressed: (int index) {

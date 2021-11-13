@@ -8,6 +8,6 @@ class Window {
 
   @override
   String toString() {
-    return 'Window{name: $name, channel: $channel}';
+    return 'Window{name: $name, channel: $channel,status: $status }';
   }
 }

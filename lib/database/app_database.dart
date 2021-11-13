@@ -5,14 +5,14 @@ import 'package:sqflite/sqflite.dart';
 Future<Database> createDatabase() {
   return getDatabasesPath().then((dbPath) {
     //alguma_coisa.db é o nome do banco, mudado para fins de teste
-    final String path = join(dbPath, 'smartWindow.db');
+    final String path = join(dbPath, 'rr.db');
     return openDatabase(path, onCreate: (db, version) {
-      db.execute('CREATE TABLE windows('
+      db.execute('CREATE TABLE window('
           'id INTEGER PRIMARY KEY, '
           'name TEXT, '
-          'status TEXT'
+          'status TEXT,'
           'channel TEXT)');
-    }, version: 1);
+    }, version: 2);
   });
 }
 
@@ -23,13 +23,13 @@ Future<int> save(Window window) {
     windowMap['channel'] = window.channel;
     windowMap['status'] = window.status;
 
-    return db.insert('contacts', windowMap);
+    return db.insert('window', windowMap);
   });
 }
 
 Future<List<Window>> findAll() {
   return createDatabase().then((db) {
-    return db.query('windows').then((maps) {
+    return db.query('window').then((maps) {
       final List<Window> windows = [];
       for (Map<String, dynamic> map in maps) {
         final Window window =

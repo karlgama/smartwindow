@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:iot/screens/home.dart';
-import 'package:iot/screens/window_register.dart';
+import 'package:iot/screens/windows_list.dart';
 import 'dart:io';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
@@ -29,7 +28,7 @@ class SmartWindow extends StatelessWidget {
         primaryColor: Colors.cyan[900],
         accentColor: Colors.green[700],
       ),
-      home: WindowRegister(),
+      home: WindowsList(),
     );
   }
 }
@@ -44,7 +43,7 @@ class MQTTClientWrapper {
   void prepareMqttClient() async {
     _setupMqttClient();
     await _connectClient();
-    _subscribeToTopic('Dart/Mqtt_client/testtopic');
+    _subscribeToTopic('teste');
     _publishMessage('Hello');
   }
 
@@ -53,7 +52,7 @@ class MQTTClientWrapper {
     try {
       print('client connecting....');
       connectionState = MqttCurrentConnectionState.CONNECTING;
-      await client.connect('smartwindow', 'vxbNyaVgW4JBmnw');
+      // await client.connect('smartwindow', 'vxbNyaVgW4JBmnw');
     } on Exception catch (e) {
       print('client exception - $e');
       connectionState = MqttCurrentConnectionState.ERROR_WHEN_CONNECTING;
@@ -80,7 +79,7 @@ class MQTTClientWrapper {
     // the next 2 lines are necessary to connect with tls, which is used by HiveMQ Cloud
     client.secure = true;
     client.securityContext = SecurityContext.defaultContext;
-    client.keepAlivePeriod = 20;
+    client.keepAlivePeriod = 60;
     client.onDisconnected = _onDisconnected;
     client.onConnected = _onConnected;
     client.onSubscribed = _onSubscribed;
@@ -108,8 +107,7 @@ class MQTTClientWrapper {
     print(
         'Publishing message "$message" to topic ${'Dart/Mqtt_client/testtopic'}');
     var payload = builder.payload;
-    client.publishMessage(
-        'Dart/Mqtt_client/testtopic', MqttQos.exactlyOnce, payload!);
+    client.publishMessage('teste', MqttQos.exactlyOnce, payload!);
   }
 
   // callbacks for different events

@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iot/screens/window_detail.dart';
+import 'package:iot/models/window.dart';
 
 class WindowCard extends StatelessWidget {
+  final Window window;
+  WindowCard(this.window);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -11,7 +15,7 @@ class WindowCard extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => WindowDetails(),
+              builder: (context) => WindowDetails(window),
             ),
           );
         },
@@ -22,8 +26,8 @@ class WindowCard extends StatelessWidget {
               width: 200,
               height: 200,
             ),
-            Text('Nome da janela'),
-            Text('Status: Aberta'),
+            Text(window.name.toString()),
+            Text('Status:' + window.status.toString()),
           ],
         ),
       ),

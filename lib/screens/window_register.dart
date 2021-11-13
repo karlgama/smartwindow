@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iot/database/app_database.dart';
 import 'package:iot/models/window.dart';
-import 'package:iot/screens/windows_list.dart';
 
 class WindowRegister extends StatelessWidget {
   @override
@@ -28,25 +28,21 @@ class WindowRegister extends StatelessWidget {
                   fontSize: 24.4,
                 ),
               ),
-              // TextField(
-              //   controller: _channelController,
-              //   decoration: InputDecoration(
-              //     labelText: 'Channel',
-              //   ),
-              //   style: TextStyle(
-              //     fontSize: 24.4,
-              //   ),
-              // ),
+              TextField(
+                controller: _channelController,
+                decoration: InputDecoration(
+                  labelText: 'Channel',
+                ),
+                style: TextStyle(
+                  fontSize: 24.4,
+                ),
+              ),
               ElevatedButton(
                 onPressed: () {
                   final String name = _nameController.text;
                   final String channel = _channelController.text;
                   final Window newWindow = Window(0, name, channel, 'fechada');
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => WindowsList(),
-                    ),
-                  );
+                  save(newWindow).then((id) => Navigator.pop(context));
                 },
                 child: Text('adicionar'),
               ),
