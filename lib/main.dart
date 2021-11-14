@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// import 'package:iot/screens/home.dart';
+import 'package:iot/screens/window_register.dart';
 import 'package:iot/screens/windows_list.dart';
 import 'dart:io';
 import 'package:mqtt_client/mqtt_client.dart';
@@ -43,7 +45,7 @@ class MQTTClientWrapper {
   void prepareMqttClient() async {
     _setupMqttClient();
     await _connectClient();
-    _subscribeToTopic('teste');
+    _subscribeToTopic('testtopic/');
     _publishMessage('Hello');
   }
 
@@ -52,7 +54,7 @@ class MQTTClientWrapper {
     try {
       print('client connecting....');
       connectionState = MqttCurrentConnectionState.CONNECTING;
-      // await client.connect('smartwindow', 'vxbNyaVgW4JBmnw');
+      await client.connect('smartwindow', 'vxbNyaVgW4JBmnw');
     } on Exception catch (e) {
       print('client exception - $e');
       connectionState = MqttCurrentConnectionState.ERROR_WHEN_CONNECTING;
@@ -73,13 +75,13 @@ class MQTTClientWrapper {
 
   void _setupMqttClient() {
     client = MqttServerClient.withPort(
-        '748aa79e64c84463991e9c556853c922.s1.eu.hivemq.cloud',
+        '0b7cc45fbcae4f69a01da6e86ad5a50a.s1.eu.hivemq.cloud',
         'smartwindow',
         8883);
     // the next 2 lines are necessary to connect with tls, which is used by HiveMQ Cloud
     client.secure = true;
     client.securityContext = SecurityContext.defaultContext;
-    client.keepAlivePeriod = 60;
+    client.keepAlivePeriod = 20;
     client.onDisconnected = _onDisconnected;
     client.onConnected = _onConnected;
     client.onSubscribed = _onSubscribed;
@@ -107,7 +109,7 @@ class MQTTClientWrapper {
     print(
         'Publishing message "$message" to topic ${'Dart/Mqtt_client/testtopic'}');
     var payload = builder.payload;
-    client.publishMessage('teste', MqttQos.exactlyOnce, payload!);
+    client.publishMessage('testtopic/', MqttQos.exactlyOnce, payload!);
   }
 
   // callbacks for different events
